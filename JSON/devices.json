@@ -1,0 +1,88 @@
+﻿[
+    {
+      "id": "L1",
+      "name": "Living room 1",
+      "status": "off",
+      "type": "light",
+      "bright": "100",
+      "maxbright": "600",
+      "rgb": "0",
+      "color": "#FFC300",
+      "power": "8w",
+      "brand": "Xiaomi"
+    },
+    {
+      "id": "L2",
+      "name": "Living room 2",
+      "status": "off",
+      "type": "light",
+      "bright": "0",
+      "maxbright": "600",
+      "rgb": "0",
+      "color": "#FFC300",
+      "power": "8w",
+      "brand": "Philips"
+    },
+    {
+      "id": "L3",
+      "name": "Hall 1",
+      "status": "on",
+      "type": "light",
+      "bright": "0",
+      "maxbright": "600",
+      "rgb": "0",
+      "color": "#FFC300",
+      "power": "8w",
+      "brand": "TP-Link"
+    },
+    {
+      "id": "L4",
+      "name": "Kitchen 1",
+      "status": "off",
+      "type": "light",
+      "bright": "0",
+      "maxbright": "600",
+      "rgb": "1",
+      "color": "#5AFD98",
+      "power": "8w",
+      "brand": "Philips"
+    },
+    {
+      "id": "L5",
+      "name": "Kitchen 2",
+      "status": "off",
+      "type": "light",
+      "bright": "0",
+      "maxbright": "600",
+      "rgb": "1",
+      "color": "#D46AE1",
+      "power": "8w",
+      "brand": "Xiaomi"
+    },
+    {
+      "id": "P1",
+      "name": "Panel 1",
+      "status": "on",
+      "type": "solarpanel",
+      "production": "100,110,118,121,124,114",
+      "max":"300",
+      "brand":"LG"
+    },
+    {
+      "id": "P2",
+      "name": "Panel 2",
+      "status": "on",
+      "type": "solarpanel",
+      "production": "100,120,130,130,132,125",
+      "max":"400",
+      "brand":"LG"
+    },{
+      "id": "P3",
+      "name": "Panel 3",
+      "status": "off",
+      "type": "solarpanel",
+      "production": "200,204,210,212,200,208",
+      "max":"250",
+      "brand":"LG"
+    }
+  ]
