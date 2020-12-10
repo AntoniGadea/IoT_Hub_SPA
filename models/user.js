@@ -1,9 +1,10 @@
 export {User};
 
 class User{
-    constructor(nick,nombre,passwd){
-        this.nick = nick;
-        this.nombre = nombre;
+    constructor(nickname,name,rank,passwd){
+        this.nickname = nickname;
+        this.name = name;
+        this.rank = rank;
         this.passwd = CryptoJS.SHA3(passwd);
     }
 

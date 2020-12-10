@@ -90,7 +90,7 @@ function relaod(device){
     let cardContainer = document.getElementById('C'+device.id);
     cardContainer.innerHTML = "";
     cardContainer.innerHTML = device.card();
-    lightEvent(device);
+    loadLight(device);
 }
 
 function errorLoad(){

@@ -9,16 +9,18 @@ function XMLRequest (url, done) {
     xhr.send();
     }
 
-function get(url,ok,error) {
+function get(url,error) {
 
     let fetchOptions = {
         method: 'get',
         headers: { "Content-type": "application/json; charset=UTF-8" },
       };
 
-    let request = fetch(url, fetchOptions);
-    request.then(ok);
-    request.catch(error);
+    let response = fetch(url, fetchOptions)
+                    .then((response)=>response.json())
+                    .catch(error);
+
+    return response;
 }
 
 
