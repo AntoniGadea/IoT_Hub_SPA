@@ -1,4 +1,4 @@
-export { overview, login, lightCard, panelCard, addModal, loading};
+export { overview, login, lightCard, panelCard, speakerCard, addModal, loading};
 
 let loading = `<div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>
@@ -140,6 +140,32 @@ function panelCard(){
                         <div class="card-body text-center">
                         <h5 class="card-tittle">`+this.name+`</h5>
                         <canvas class="p-3" id="chart-`+this.id+`" width="100%" height="100%"></canvas>
+                        </div>
+                    </div>
+                </div>`;
+
+    return card;
+}
+
+function speakerCard(){
+    let card = `<div id="S`+this.id+`">
+                    <div id="`+this.id+`" class="my-3 mx-5 card card-speacker">
+                        <div class="card-body text-center">
+                        <h5 class="card-tittle mb-3">`+this.name+`</h5>
+                        <span class="text-left mr-2">
+                            <i class="fas fa-volume-up mr-1"></i>`+this.volume+`
+                        </span>`;
+                
+                switch(this.brand){
+                    case("google"): card += `<img class="logo text-center" src="../img/google.png">`;
+                                    break;
+                    case("alexa"): card += `<img class="logo" src="../img/alexa.png">`;
+                                    break;
+                    case("apple"): card += `<img class="logo" src="../img/apple.png">`;
+                                    break;
+                }        
+                        
+                card += `<span class="text-right ml-4">`+this.status+`</span>
                         </div>
                     </div>
                 </div>`;

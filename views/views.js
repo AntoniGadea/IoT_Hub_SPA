@@ -7,6 +7,7 @@ function clearView(selector){
     let node = document.getElementById(selector);
     node.innerHTML = ("");
     }
+
 function drawLoading(){
 document.body.innerHTML = loading;
 }
@@ -31,7 +32,7 @@ function drawDevices(devices){
                             break;
         case "fridge": fridgeCard(d);
                         break;
-        case "speacker": speackerCard(d);
+        case "speaker": document.querySelector("#speakers").innerHTML += d.card();
                             break;
        }
    }
