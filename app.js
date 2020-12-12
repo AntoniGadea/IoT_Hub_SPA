@@ -1,6 +1,6 @@
 export{validarLogin};
 import {setCookie,getCookie,clearCookie,checkCookie} from './models/cookie.js';
-import {drawLogin, drawOverview, drawDevices, errorLoad,  drawLoading} from './views/views.js';
+import {drawLogin, drawOverview, drawDevices, errorLoad,  drawLoading, drawAdminPanel} from './views/views.js';
 import {get} from './models/http.js';
 import {Light} from './models/devices/light.js';
 import {Solarpanel} from "./models/devices/solarpanel.js";
@@ -31,6 +31,10 @@ function offline(){
   drawOverview();
   drawDevices(devices);
   errorLoad();
+}
+
+function admin(){
+  drawAdminPanel();
 }
 
 async function getUsers(){
@@ -74,7 +78,11 @@ function validarLogin(){
   for(let user of users){
     if(user.nickname == name && comparePasswd(user.passwd,passwd)){
       setCookie("username",user, 365);
-      online();
+      if(user.rank == "admin"){
+        admin();
+      }else{
+        online();
+      }
       }
     }
   }

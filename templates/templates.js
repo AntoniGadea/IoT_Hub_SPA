@@ -1,10 +1,41 @@
-export { overview, login, lightCard, panelCard, speakerCard, addModal, loading};
+export { overview, login, lightCard, panelCard, speakerCard, addModal, loading, adminPanel};
 
 let loading = `<div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>`;
 
 let overview = `<div class="container-fluid">
+                    <div class="row bg-white p-3">
+                        <h2 class="col-8 pl-5">Dashboard</h2>
+                        <div class="col-2">
+                            <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                                <span class="pt-2 pr-2">Add</span>
+                                <svg id="add" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-plus-square-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="col-2 pr-5">
+                            <a id="logout" class="btn btn-danger" href="#">LogOut</a>
+                        </div>
+                    </div>
+                    <div id="deck" class="m-5">
+                        <h3>Lights</h3>
+                        <hr>
+                        <div id="lights" class="row d-flex justify-content-center">
+                        </div>
+                        <h3 class="mt-5">Solar Panels</h3>
+                        <hr>
+                        <div id="panels" class="row d-flex justify-content-center">
+                        </div>
+                        <h3 class="mt-5">Speakers</h3>
+                        <hr>
+                        <div id="speakers" class="row d-flex justify-content-center">
+                        </div>
+                    </div>
+                </div>`;
+
+let adminPanel = `<div class="container-fluid">
                     <div class="row bg-white p-3">
                         <h2 class=" col-8 pl-5">Dashboard</h2>
                         <div class="col-2 text-right">
@@ -20,20 +51,10 @@ let overview = `<div class="container-fluid">
                         </div>
                     </div>
                     <div id="deck" class="m-5">
-                        <h2>Lights</h2>
-                        <hr>
-                        <div id="lights" class="row">
-                        </div>
-                        <h2 class="mt-5">Solar Panels</h2>
-                        <hr>
-                        <div id="panels" class="row">
-                        </div>
-                        <h2 class="mt-5">Speakers</h2>
-                        <hr>
-                        <div id="speakers" class="row">
-                        </div>
+                       
                     </div>
-                </div>`;
+                    </div>
+                    </div>`;
 
 
 let login = `<div class="container-scroller p-5">
@@ -152,7 +173,7 @@ function speakerCard(){
                     <div id="`+this.id+`" class="my-3 mx-5 card card-speacker">
                         <div class="card-body text-center">
                         <h5 class="card-tittle mb-3">`+this.name+`</h5>
-                        <span class="text-left mr-2">
+                        <span class="text-left mr-3">
                             <i class="fas fa-volume-up mr-1"></i>`+this.volume+`
                         </span>`;
                 
@@ -189,21 +210,20 @@ let addModal = `<div class="modal fade" id="exampleModal" tabindex="-1" role="di
                         <input type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="device-type" class="col-form-label">Type:</label>
-                        <select name="device-type">
-                            <option value="light">Light</option>
-                            <option value="speaker">Speaker</option>
-                            <option value="fridge">Fridge</option>
-                            <option value="solarpanel">Solarpanel</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="brand" class="col-form-label">Brand:</label>
                         <input type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="brand" class="col-form-label">Brand:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
+                        <label for="device-type" class="col-form-label">Type:</label>
+                        <select id="modal-input" name="device-type">
+                            <option value="-" selected>--</option>
+                            <option value="light">Light</option>
+                            <option value="speaker">Speaker</option>
+                            <option value="fridge" disabled>Fridge</option>
+                            <option value="solarpanel">Solarpanel</option>
+                        </select>
+                    </div>
+                    <div id="insertModal">
                     </div>
                 </form>
                 </div>
