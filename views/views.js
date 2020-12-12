@@ -1,12 +1,15 @@
-import { overview, login, lightCard, addModal } from '../templates/templates.js';
+import { overview, login, lightCard, addModal, loading} from '../templates/templates.js';
 import {setCookie,getCookie,clearCookie,checkCookie} from '../models/cookie.js';
 import {validarLogin} from '../app.js';
-export { drawLogin, drawOverview, drawDevices, errorLoad};
+export { drawLogin, drawOverview, drawDevices, errorLoad,  drawLoading};
 
 function clearView(selector){
     let node = document.getElementById(selector);
     node.innerHTML = ("");
     }
+function drawLoading(){
+document.body.innerHTML = loading;
+}
 
 function drawLogin(){
     document.body.innerHTML = login;
@@ -39,7 +42,7 @@ function loadOverviewEvents(){
     let logOutBtn = document.body.querySelector("#logout");
     let addBtn = document.body.querySelector("#add");
 
-    logOutBtn.addEventListener("click",()=>{clearCookie(),drawLogin()});
+    logOutBtn.addEventListener("click",()=>{clearCookie(),drawLogin();});
 }
 
 function loadCardEvents(devices){
@@ -76,14 +79,14 @@ function loadLight(device){
             card.d.on();
             relaod(card.d);
         }
-    })
+    });
 
     card.querySelector(".close").addEventListener("click",()=>{card.remove()});
 
     colorpicker.addEventListener("change",()=>{
         card.d.changeColor(colorpicker.value);
         relaod(card.d);
-    })
+    });
 }
 
 function relaod(device){

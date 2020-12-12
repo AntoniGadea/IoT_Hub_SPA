@@ -1,6 +1,6 @@
 export{validarLogin};
 import {setCookie,getCookie,clearCookie,checkCookie} from './models/cookie.js';
-import {drawLogin, drawOverview, drawDevices, errorLoad} from './views/views.js';
+import {drawLogin, drawOverview, drawDevices, errorLoad,  drawLoading} from './views/views.js';
 import {get} from './models/http.js';
 import {Light} from './models/devices/light.js';
 import {Solarpanel} from "./models/devices/solarpanel.js";
@@ -16,7 +16,6 @@ async function online(){
   plainObj = await get("http://127.0.0.1:5500/JSON/devices.json",offline);
   saveLocal(plainObj);
   devices = createObjects(plainObj);
-  getUsers();
   drawOverview();
   drawDevices(devices);
 }
@@ -72,44 +71,35 @@ function validarLogin(){
   let passwd = document.getElementById("inputPassword").value;
 
   for(let user of users){
-    if(user.nickname == name && user.passwd.words == passwd.words){
-      //Create Cookie
+    if(user.nickname == name && comparePasswd(user.passwd,passwd)){
       setCookie("username",user, 365);
       online();
-      //Load main menu
-      //Load user
-      //client.name = user;
-      //client.loadPhoto();
-      //client.loadStatus();
       }
     }
   }
   
   function comparePasswd(hashKey,key){
-    let key = CryptoJS.SHA3(key);
+    key = CryptoJS.SHA3(key);
     key = key.words;
     hashKey = hashKey.words;
-    console.log(key);
-    console.log(hashKey);
     
-    if(key.length != hashKey){
-      return false;
-    }else{
-      for(let i=0;i<hashKey.length;i++){
-       if(key[i] != hashKey[i])
-        return false;
-      }
-    }
-    return true;
+    return key.toString() == hashKey.toString();
   }
 
   document.addEventListener("DOMContentLoaded", function () {
 
-    if(checkCookie() != null){
-      online();
-    }else{
-      drawLogin();
-    }  
+    const START = new Promise(async function(resolve,reject){
+                  drawLoading();
+                  await getUsers();
+                  
+                  if(getCookie("username") == ""){
+                    reject();
+                  }else{
+                    resolve();
+                  }
+                })
+      .then(online)
+      .catch(drawLogin);
   });
 
 

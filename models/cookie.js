@@ -23,7 +23,7 @@ export {setCookie,getCookie,clearCookie,checkCookie}
     }
     
     function checkCookie() {
-      var user = getCookie("username");
+      let user = getCookie("username");
       if (user != "") {
         return user;
       } 

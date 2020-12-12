@@ -1,4 +1,8 @@
-export { overview, login, lightCard, panelCard, addModal};
+export { overview, login, lightCard, panelCard, addModal, loading};
+
+let loading = `<div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>`;
 
 let overview = `<div class="container-fluid">
                     <div class="row bg-white p-3">
