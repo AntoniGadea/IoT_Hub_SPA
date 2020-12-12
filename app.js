@@ -5,6 +5,7 @@ import {get} from './models/http.js';
 import {Light} from './models/devices/light.js';
 import {Solarpanel} from "./models/devices/solarpanel.js";
 import {User} from './models/user.js';
+import { Speaker } from './models/devices/speaker.js';
 
 //GLOBAL
 let users = [];
@@ -54,7 +55,7 @@ function createObjects(devices){
                           break;
       case "fridge": ;
                       break;
-      case "speacker": ;
+      case "speaker": ; buildObj [i++] = Object.assign(new Speaker(),d);
                           break;
     }
   }
@@ -63,7 +64,7 @@ function createObjects(devices){
 
 function saveLocal(obj){
   let json = JSON.stringify(obj);
-  localStorage.setItem(checkCookie(),json);
+  localStorage.setItem(getCookie(),json);
 }
 
 function validarLogin(){

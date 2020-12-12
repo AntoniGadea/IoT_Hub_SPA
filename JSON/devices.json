@@ -64,7 +64,7 @@
       "name": "Panel 1",
       "status": "on",
       "type": "solarpanel",
-      "production": "100,110,118,121,124,114",
+      "production": "100,101,102,102,102,103",
       "max":"300",
       "brand":"LG"
     },
@@ -73,7 +73,7 @@
       "name": "Panel 2",
       "status": "on",
       "type": "solarpanel",
-      "production": "100,120,130,130,132,125",
+      "production": "100,99,98,97,97,97",
       "max":"400",
       "brand":"LG"
     },{
@@ -81,8 +81,32 @@
       "name": "Panel 3",
       "status": "off",
       "type": "solarpanel",
-      "production": "200,204,210,212,200,208",
+      "production": "200,201,202,203,202,201",
       "max":"250",
       "brand":"LG"
+    },
+    {
+      "id": "S1",
+      "brand": "google",
+      "name": "Google Home",
+      "status": "on",
+      "type": "speaker",
+      "volume":"30"
+    },
+    {
+      "id": "S2",
+      "brand": "alexa",
+      "name": "Echo mini",
+      "status": "on",
+      "type": "speaker",
+      "volume":"60"
+    },
+    {
+      "id": "S3",
+      "brand": "apple",
+      "name": "HomePod",
+      "status": "on",
+      "type": "speaker",
+      "volume":"50"
     }
   ]

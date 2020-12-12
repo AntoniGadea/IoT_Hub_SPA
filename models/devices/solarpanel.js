@@ -19,6 +19,8 @@ class Solarpanel{
             labels: Solarpanel.genLabels(),
             datasets: [{
                 label: "Power Production (KWh)",
+                borderColor: "rgb(71, 161, 198)",
+                backgroundColor: "rgb(176, 224, 243)",
                 data: this.production,
               }]
         } ;
@@ -29,7 +31,7 @@ class Solarpanel{
                 duration: 0
             },
             legend: {
-              display: false,
+              display: true,
               position: 'top',
               labels: {
                 boxWidth: 80,
@@ -53,9 +55,7 @@ class Solarpanel{
     }
 
     randomize(){
-        let newData;
-
-        newData = Math.floor(Math.random()*2);
+        let newData = Math.floor(Math.random()*2);
 
         if(this.production.length>=5){
            this.production.shift();
