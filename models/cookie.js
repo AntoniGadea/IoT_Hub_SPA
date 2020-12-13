@@ -24,9 +24,7 @@ export {setCookie,getCookie,clearCookie,checkCookie}
     
     function checkCookie() {
       let user = getCookie("username");
-      if (user != "") {
         return user;
-      } 
     }
   
     function clearCookie(){

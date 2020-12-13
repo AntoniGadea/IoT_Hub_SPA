@@ -1,4 +1,4 @@
-export{validarLogin};
+export{validarLogin,createObjects};
 import {setCookie,getCookie,clearCookie,checkCookie} from './models/cookie.js';
 import {drawLogin, drawOverview, drawDevices, errorLoad,  drawLoading, drawAdminPanel} from './views/views.js';
 import {get} from './models/http.js';
@@ -14,23 +14,10 @@ async function online(){
   let plainObj;
   let devices;
 
-  plainObj = await get("http://127.0.0.1:5500/JSON/devices.json",offline);
-  saveLocal(plainObj);
+  plainObj = await get("http://127.0.0.1:5500/JSON/devices.json");
   devices = createObjects(plainObj);
   drawOverview();
   drawDevices(devices);
-}
-
-function offline(){
-  let plainObj;
-  let devices;
-
-  plainObj = localStorage.getItem(checkCookie());
-  plainObj = JSON.parse(plainObj);
-  devices = createObjects(plainObj);
-  drawOverview();
-  drawDevices(devices);
-  errorLoad();
 }
 
 function admin(){
@@ -66,18 +53,13 @@ function createObjects(devices){
   return buildObj;
 }
 
-function saveLocal(obj){
-  let json = JSON.stringify(obj);
-  localStorage.setItem(getCookie(),json);
-}
-
 function validarLogin(){
   let name = document.getElementById("inputUsername").value;
   let passwd = document.getElementById("inputPassword").value;
 
   for(let user of users){
     if(user.nickname == name && comparePasswd(user.passwd,passwd)){
-      setCookie("username",user, 365);
+      setCookie("username",user.name, 365);
       if(user.rank == "admin"){
         admin();
       }else{
@@ -101,7 +83,7 @@ function validarLogin(){
                   drawLoading();
                   await getUsers();
                   
-                  if(getCookie("username") == ""){
+                  if(checkCookie() == ""){
                     reject();
                   }else{
                     resolve();

@@ -10,7 +10,7 @@ let overview = `<div class="container-fluid">
                         <div class="col-2">
                             <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
                                 <span class="pt-2 pr-2">Add</span>
-                                <svg id="add" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-plus-square-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-plus-square-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
                                 </svg>
                             </button>
@@ -63,7 +63,7 @@ let login = `<div class="container-scroller p-5">
                     <div class="row w-100">
                     <div class="col-lg-4 mx-auto">
                         <div class="auto-form-wrapper">
-                        <form action="#">
+                        <form onsubmit="false">
                             <div class="form-group">
                             <label class="label">Username</label>
                             <div class="input-group">
@@ -112,41 +112,54 @@ let login = `<div class="container-scroller p-5">
             </div>`;
             
 function lightCard(){     
-    let card = `<div id="C`+this.id+`"><div id="`+this.id+`" class="flip-card my-3 mx-5 card card-light">
+    let card = `<div id="C`+this.id+`"><div id="`+this.id+`" class="flip-card m-4 card card-light">
                     <div class="flip-card-inner">
                         <div class="flip-card-front card-body">
                             <h5 class="card-title mb-4">`+this.name+`</h5>
                             <p class="card-text">`;
 
                 if(this.status == "off"){
-                    card += `<i class="fas fa-lightbulb fa-2x" style="color:#505050"></i>`;
+                    card += `<i class="fas fa-lightbulb fa-2x" style="color:#505050"></i>
+                            <span class="ml-4">`;
                 }else{
-                    card += `<i class="fas fa-lightbulb fa-2x" style="color:`+this.color+`"></i>`;
+                    card += `<i class="fas fa-lightbulb fa-2x" style="color:`+this.color+`"></i>
+                            <span class="ml-4">`;
                 }
 
-                    card +=`<span class="ml-4">`+this.brand+`</sapan>
-                            </p>
+                switch(this.brand){
+                    case("Xiaomi"): card += `<img class="logo" src="../img/xiaomi.png"></span>`;
+                                    break;
+                    case("Philips"): card += `<img class="logo" src="../img/philips.png"></span>`;
+                                    break;
+                    case("TP-Link"): card += `<img class="logo" src="../img/tplink.png"></span>`;
+                                    break;
+                    default : card += this.brand+`</span>`;
+                                    break;
+                }
+                    card +=` </p>
                         </div>
-                        <div class="flip-card-back card-body">
-                            <button type="button" class="close mr-2" aria-label="Close">
+                        <div class="flip-card-back card-body text-center">
+                            <button type="button" class="close mr-3" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <p class="card-text">
                                 <label for="color">Color</label>
-                                <input class="colorpicker" name="color" class="m-2" type="color" value="`+this.color+`"><br>`;
+                                <div class="colorpicker-container">
+                                    <input class="colorpicker" name="color" type="color" value="`+this.color+`"><br>
+                                </div>
+                                <br>`;
 
                     if(this.rgb == 0){
-                        card += `<span>This light is not RGB</span>
-                                </p>`;
+                        card += `<span class="text-right">This light is not RGB</span>
+                                <br>`;
                     }else{
                         card += `<span>This light is RGB</span>
-                                </p>`;
+                                <br>`;
                     }
 
                 if(this.status == "off"){
-                    card += `<button data-card="`+this.id+`" class="btn btn-info">Turn on</button>`;
+                    card += `<button data-card="`+this.id+`" class="btn btn-info m-2">Turn on</button>`;
                 }else{
-                    card += `<button class="btn btn-info">Turn off</button>`;
+                    card += `<button id="add" class="btn btn-info m-2">Turn off</button>`;
                 }
                 card += `</div>
                     </div>
@@ -204,18 +217,29 @@ let addModal = `<div class="modal fade" id="exampleModal" tabindex="-1" role="di
                 </button>
                 </div>
                 <div class="modal-body">
-                <form>
+                <form onsubmit="false">
                     <div class="form-group">
                         <label for="name" class="col-form-label">Name:</label>
-                        <input type="text" class="form-control">
+                        <input type="text" name="name" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="brand" class="col-form-label">Brand:</label>
-                        <input type="text" class="form-control">
+                        <select  name="brand">
+                            <option value="-" selected>--</option>
+                            <option value="Xiaomi">Xiaomi</option>
+                            <option value="Philips">Philips</option>
+                            <option value="LG">LG</option>
+                            <option value="TP-Link">TP-Link</option>
+                            <option value="Samsungk">Samsung</option>
+                            <option value="Google">Google</option>
+                            <option value="Apple">Apple</option>
+                            <option value="Alexa">Alexa</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="device-type" class="col-form-label">Type:</label>
-                        <select id="modal-input" name="device-type">
+                        <label for="type" class="col-form-label">Type:</label>
+                        <select id="modal-input" name="type">
                             <option value="-" selected>--</option>
                             <option value="light">Light</option>
                             <option value="speaker">Speaker</option>
@@ -229,7 +253,7 @@ let addModal = `<div class="modal fade" id="exampleModal" tabindex="-1" role="di
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Save</button>
+                <button id="add" type="button" class="btn btn-success">Save</button>
                 </div>
             </div>
             </div>

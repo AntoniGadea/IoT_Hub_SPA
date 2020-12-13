@@ -1,6 +1,9 @@
 import { overview, login, lightCard, addModal, loading, adminPanel} from '../templates/templates.js';
 import {setCookie,getCookie,clearCookie,checkCookie} from '../models/cookie.js';
-import {validarLogin} from '../app.js';
+import {validarLogin,createObjects} from '../app.js';
+import {Light} from '../models/devices/light.js';
+import {Solarpanel} from "../models/devices/solarpanel.js";
+import { Speaker } from '../models/devices/speaker.js';
 export { drawLogin, drawOverview, drawDevices, errorLoad,  drawLoading, drawAdminPanel};
 
 function clearView(selector){
@@ -53,8 +56,14 @@ function loadOverviewEvents(){
     modalType.addEventListener("change",()=>{
         switch(modalType.value){
             case("light"):modalLight();
+                            break;
+            case("solarpanel"):modalSolarPanel();
+                                break;
+            case("speaker"): modalSpeaker();
+                                break;
         }
     })
+    addBtn.addEventListener("click",checkModal);
 }
 
 function loadCardEvents(devices){
@@ -140,7 +149,7 @@ function modalLight(){
     labelRgb.setAttribute("class","col-form-label");
 
     labelPower = document.createElement("label");
-    labelPower.appendChild(document.createTextNode("Power:"));
+    labelPower.appendChild(document.createTextNode("Power (W):"));
     labelPower.setAttribute("for","power");
     labelPower.setAttribute("class","col-form-label");
 
@@ -174,5 +183,79 @@ function modalLight(){
     modalLight.appendChild(formGroup2);
 
     document.body.querySelector("#insertModal").remove();
-    document.body.querySelector(".modal-body").appendChild(modalLight);
+    document.body.querySelector("form").appendChild(modalLight);
+}
+
+function modalSolarPanel(){
+    let modalPanel;
+    let formGroup1;
+    let labelMax;
+    let inputMax;
+
+    modalPanel = document.createElement("div");
+    modalPanel.setAttribute("id","insertModal");
+
+    formGroup1 = document.createElement("div");
+    formGroup1.setAttribute("class","form-group");
+
+    labelMax = document.createElement("label");
+    labelMax.setAttribute("for","max")
+    labelMax.appendChild(document.createTextNode("Max power production"))
+
+    inputMax = document.createElement("input");
+    inputMax.setAttribute("type","text");
+    inputMax.setAttribute("name","max")
+
+    formGroup1.appendChild(labelMax);
+    formGroup1.appendChild(inputMax);
+
+    modalPanel.appendChild(formGroup1);
+
+    document.body.querySelector("#insertModal").remove();
+    document.body.querySelector("form").appendChild(modalPanel);
+}
+
+function modalSpeaker(){
+    document.body.querySelector("#insertModal").remove();
+}
+
+function checkModal(){
+    let form = document.querySelector("form");
+    let formParts = form.querySelectorAll(".form-group");
+    let inputs = [];
+    let selects = [];
+    let object = `{`;
+
+    for(let i=0;i<formParts.length;i++){
+        if(formParts[i].querySelector("input") != null)
+            inputs[i] = formParts[i].querySelector("input");
+        if(formParts[i].querySelector("select") != null)
+        selects[i] = formParts[i].querySelector("select");
+    }
+    inputs = inputs.filter(e => e != "empty");
+    inputs = inputs.sort();
+    selects = selects.filter(e => e != "empty");
+    selects = selects.sort();
+
+    for(let input of inputs){
+        object += `"${input.name}":"${input.value}",`
+    }
+
+    for(let select of selects){
+        object += `"${select.name}":"${select.value}",`
+    }
+    object += `"no":"no"}`;
+    object = JSON.parse(object)
+    console.log(object.type);
+    switch(object.type){
+        case "light": object = Object.assign(new Light(),object);
+                        break;
+        case "solarpanel": object = Object.assign(new Solarpanel(),object);
+                            break;
+        case "speaker": ; object = Object.assign(new Speaker(),object);
+                            break;
+      }
+      let devices  = [];
+      devices.push(object)
+      drawDevices(devices);
 }

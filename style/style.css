@@ -30,8 +30,8 @@ a {
 }
 
 .card-light{
-    width: 15rem;
-    height: 9rem;
+    width: 16rem;
+    height: 10rem;
 }
 
 .card-panel{
@@ -93,6 +93,7 @@ border-radius: 80px;
 .flip-card-front {
 background-color:white;
 color: black;
+padding: 2em;
 }
 
 .flip-card-back {
@@ -113,14 +114,28 @@ transform: rotateY(180deg);
 }
 
 .colorpicker{
-    height:2em;
-    width: 2em;
-    border-radius: 20px;
+    position: absolute;
+    height:46px;
+    width: 46px;
+    right: -10px;
+    top: -10px;
+    border: none;
+}
+
+.colorpicker-container{
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    height: 30px;
+    width: 30px;
+    margin-left: 1em;
+    border: 1px solid black;
+    border-radius: 30px;
 }
 
 .logo{
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
 }
 
 
