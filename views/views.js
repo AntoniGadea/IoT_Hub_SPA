@@ -1,10 +1,10 @@
 import { overview, login, lightCard, addModal, loading, adminPanel} from '../templates/templates.js';
 import {setCookie,getCookie,clearCookie,checkCookie} from '../models/cookie.js';
-import {validarLogin,createObjects} from '../app.js';
+import {validarLogin,validateModal} from '../app.js';
 import {Light} from '../models/devices/light.js';
 import {Solarpanel} from "../models/devices/solarpanel.js";
 import { Speaker } from '../models/devices/speaker.js';
-export { drawLogin, drawOverview, drawDevices, errorLoad,  drawLoading, drawAdminPanel};
+export { drawLogin, drawOverview, drawDevices, errorLoad,  drawLoading, drawAdminPanel,loadModalEvents, reloadAll, drawUsers};
 
 function clearView(selector){
     let node = document.getElementById(selector);
@@ -28,6 +28,7 @@ function drawOverview(){
 
 function drawAdminPanel(){
     document.body.innerHTML = adminPanel;
+    loadAdminOverviewEvents();
 }
 
 function drawDevices(devices){
@@ -46,13 +47,32 @@ function drawDevices(devices){
    loadCardEvents(devices);
 }
 
+function drawUsers(users){
+    for(let u of users){
+       document.querySelector("#deck").innerHTML += u.card()
+    }
+ }
+
 function loadOverviewEvents(){
     let logOutBtn = document.body.querySelector("#logout");
-    let addBtn = document.body.querySelector("#add");
-    let modalBody = document.body.querySelector(".modal-body");
-    let modalType = modalBody.querySelector("#modal-input"); 
 
     logOutBtn.addEventListener("click",()=>{clearCookie(),drawLogin();});
+   loadModalEvents();
+}
+
+function loadAdminOverviewEvents(){
+    let logOutBtn = document.body.querySelector("#logout");
+    let addBtn = document.body.querySelector("#add");
+
+    logOutBtn.addEventListener("click",()=>{clearCookie(),drawLogin();});
+    addBtn.addEventListener("click",()=>{alert("Cuant tinga backend anira <3");});
+}
+
+function loadModalEvents(){
+    let addBtn = document.body.querySelector("#add");
+    let modalBody = document.body.querySelector(".modal-body");
+    let modalType = modalBody.querySelector("#modal-input");
+
     modalType.addEventListener("change",()=>{
         switch(modalType.value){
             case("light"):modalLight();
@@ -63,7 +83,7 @@ function loadOverviewEvents(){
                                 break;
         }
     })
-    addBtn.addEventListener("click",checkModal);
+    addBtn.addEventListener("click",validateModal);
 }
 
 function loadCardEvents(devices){
@@ -83,7 +103,8 @@ function loadCardEvents(devices){
 
 function loadPanel(device){
     document.getElementById(device.id);
-    device.createChart(); 
+    device.createChart();
+    device.startRandomValues();
 }
 
 function loadLight(device){
@@ -95,10 +116,10 @@ function loadLight(device){
     button.addEventListener("click",()=>{
         if(card.d.status == "on"){
             card.d.off();
-            relaod(card.d);
+            reload(card.d);
         }else{
             card.d.on();
-            relaod(card.d);
+            reload(card.d);
         }
     });
 
@@ -106,15 +127,34 @@ function loadLight(device){
 
     colorpicker.addEventListener("change",()=>{
         card.d.changeColor(colorpicker.value);
-        relaod(card.d);
+        reload(card.d);
     });
 }
 
-function relaod(device){
-    let cardContainer = document.getElementById('C'+device.id);
-    cardContainer.innerHTML = "";
-    cardContainer.innerHTML = device.card();
-    loadLight(device);
+function reload(device){
+    let cardContainer;
+    switch(device.type){
+        case "light": cardContainer = document.getElementById('C'+device.id);
+                        cardContainer.innerHTML = "";
+                        cardContainer.innerHTML = device.card();
+                        loadLight(device);
+                        break;
+        case "solarpanel": document.querySelector("#panels").innerHTML = device.card();
+                            break;
+        case "fridge": fridgeCard(d);
+                        break;
+        case "speacker": cardContainer = document.getElementById('S'+device.id);
+                            cardContainer.innerHTML = "";
+                            cardContainer.innerHTML = device.card();
+                            break;
+       }
+    
+}
+
+function reloadAll(devices){
+    for(let d of devices){
+        reload(d);
+    }
 }
 
 function errorLoad(){
@@ -158,14 +198,14 @@ function modalLight(){
     
     inputRgb = document.createElement("option");
     inputRgb.appendChild(document.createTextNode("No"));
-    inputRgb.setAttribute("value","no");
+    inputRgb.setAttribute("value","0");
     inputRgb.setAttribute("selected","selected");
 
     selectRgb.appendChild(inputRgb);
 
     inputRgb = document.createElement("option");
     inputRgb.appendChild(document.createTextNode("Yes"));
-    inputRgb.setAttribute("value","yes");
+    inputRgb.setAttribute("value","1");
 
     selectRgb.appendChild(inputRgb);
 
@@ -182,8 +222,14 @@ function modalLight(){
     modalLight.appendChild(formGroup1);
     modalLight.appendChild(formGroup2);
 
-    document.body.querySelector("#insertModal").remove();
-    document.body.querySelector("form").appendChild(modalLight);
+    let oldForm = document.body.querySelector("#insertModal");
+    if(oldForm != null){
+        oldForm.remove();
+        document.body.querySelector("form").appendChild(modalLight);
+    }else{
+        document.body.querySelector("form").appendChild(modalLight);
+    }
+   
 }
 
 function modalSolarPanel(){
@@ -211,51 +257,19 @@ function modalSolarPanel(){
 
     modalPanel.appendChild(formGroup1);
 
-    document.body.querySelector("#insertModal").remove();
-    document.body.querySelector("form").appendChild(modalPanel);
+    let oldForm = document.body.querySelector("#insertModal");
+    if(oldForm != null){
+        oldForm.remove();
+        document.body.querySelector("form").appendChild(modalPanel);
+    }else{
+        document.body.querySelector("form").appendChild(modalPanel);
+    }
+   
 }
 
 function modalSpeaker(){
-    document.body.querySelector("#insertModal").remove();
-}
-
-function checkModal(){
-    let form = document.querySelector("form");
-    let formParts = form.querySelectorAll(".form-group");
-    let inputs = [];
-    let selects = [];
-    let object = `{`;
-
-    for(let i=0;i<formParts.length;i++){
-        if(formParts[i].querySelector("input") != null)
-            inputs[i] = formParts[i].querySelector("input");
-        if(formParts[i].querySelector("select") != null)
-        selects[i] = formParts[i].querySelector("select");
+    let oldForm = document.body.querySelector("#insertModal");
+    if(oldForm != null){
+        oldForm.remove();
     }
-    inputs = inputs.filter(e => e != "empty");
-    inputs = inputs.sort();
-    selects = selects.filter(e => e != "empty");
-    selects = selects.sort();
-
-    for(let input of inputs){
-        object += `"${input.name}":"${input.value}",`
-    }
-
-    for(let select of selects){
-        object += `"${select.name}":"${select.value}",`
-    }
-    object += `"no":"no"}`;
-    object = JSON.parse(object)
-    console.log(object.type);
-    switch(object.type){
-        case "light": object = Object.assign(new Light(),object);
-                        break;
-        case "solarpanel": object = Object.assign(new Solarpanel(),object);
-                            break;
-        case "speaker": ; object = Object.assign(new Speaker(),object);
-                            break;
-      }
-      let devices  = [];
-      devices.push(object)
-      drawDevices(devices);
 }

@@ -5,11 +5,16 @@ class Solarpanel{
     constructor(id,type,name,status,production,max,brand){
         this.id = id;
         this.name = name;
+        this.production = production;
         this.status = status;
         this.type = type;
         this.max = max;
         this.brand = brand;
         this.card = panelCard;
+        
+        if(this.production == null){
+            this.production = "100,101,102,102,102,103";
+        }
     }
 
     createChart(){
@@ -48,10 +53,7 @@ class Solarpanel{
             options: this.chartOptions
           });
 
-        window.setInterval(()=>{
-            this.randomize();
-            this.chart.update();
-        },60000)
+          this.startRandomValues();
     }
 
     randomize(){
@@ -90,6 +92,14 @@ class Solarpanel{
 
         }
         return labels.reverse();
+    }
+
+    startRandomValues(){
+        window.setInterval(()=>{
+            this.randomize();
+            this.chart.update();
+        },60000);
+        
     }
 
 }

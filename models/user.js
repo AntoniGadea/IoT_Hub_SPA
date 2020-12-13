@@ -1,4 +1,5 @@
 export {User};
+import {userCard} from '../templates/templates.js';
 
 class User{
     constructor(nickname,name,rank,passwd){
@@ -6,6 +7,7 @@ class User{
         this.name = name;
         this.rank = rank;
         this.passwd = CryptoJS.SHA3(passwd);
+        this.card = userCard;
     }
 
     getNick(){

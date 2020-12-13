@@ -14,6 +14,13 @@ class Light{
         this.rgb = rgb;
         this.brand = brand;
         this.card = lightCard;
+
+        if(color == undefined){
+            this.color = "#FFC300";
+        }
+        if(status == undefined){
+            this.status = "off";
+        }
     }
 
     on(){

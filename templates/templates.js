@@ -1,4 +1,4 @@
-export { overview, login, lightCard, panelCard, speakerCard, addModal, loading, adminPanel};
+export { overview, login, lightCard, panelCard, speakerCard, userCard, addModal, loading, adminPanel};
 
 let loading = `<div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>
@@ -112,29 +112,39 @@ let login = `<div class="container-scroller p-5">
             </div>`;
             
 function lightCard(){     
-    let card = `<div id="C`+this.id+`"><div id="`+this.id+`" class="flip-card m-4 card card-light">
+    let card = `<div id="C${this.id}"><div id="${this.id}" class="flip-card m-4 card card-light">
                     <div class="flip-card-inner">
                         <div class="flip-card-front card-body">
-                            <h5 class="card-title mb-4">`+this.name+`</h5>
+                            <h5 class="card-title mb-4">${this.name}</h5>
                             <p class="card-text">`;
 
                 if(this.status == "off"){
                     card += `<i class="fas fa-lightbulb fa-2x" style="color:#505050"></i>
                             <span class="ml-4">`;
                 }else{
-                    card += `<i class="fas fa-lightbulb fa-2x" style="color:`+this.color+`"></i>
+                    card += `<i class="fas fa-lightbulb fa-2x" style="color:${this.color}"></i>
                             <span class="ml-4">`;
                 }
 
                 switch(this.brand){
-                    case("Xiaomi"): card += `<img class="logo" src="../img/xiaomi.png"></span>`;
+                    case("Google"): card += `<img class="logo text-center" src="../img/google.png">`;
                                     break;
-                    case("Philips"): card += `<img class="logo" src="../img/philips.png"></span>`;
+                    case("Alexa"): card += `<img class="logo" src="../img/alexa.png">`;
                                     break;
-                    case("TP-Link"): card += `<img class="logo" src="../img/tplink.png"></span>`;
+                    case("Apple"): card += `<img class="logo" src="../img/apple.png">`;
                                     break;
-                    default : card += this.brand+`</span>`;
+                    case("Xiaomi"): card += `<img class="logo" src="../img/xiaomi.png">`;
+                                             break;
+                    case("Philips"): card += `<img class="logo" src="../img/philips.png">`;
                                     break;
+                    case("TP-Link"): card += `<img class="logo" src="../img/tplink.png">`;
+                                             break;
+                    case("LG"): card += `<img class="logo" src="../img/lg.png">`;
+                                            break;
+                    case("Samsung"): card += `<img class="logo" src="../img/samsung.png">`;
+                                            break;
+                    default : card += `</span>`;
+                                        break;
                 }
                     card +=` </p>
                         </div>
@@ -144,7 +154,7 @@ function lightCard(){
                             </button>
                                 <label for="color">Color</label>
                                 <div class="colorpicker-container">
-                                    <input class="colorpicker" name="color" type="color" value="`+this.color+`"><br>
+                                    <input class="colorpicker" name="color" type="color" value="${this.color}"><br>
                                 </div>
                                 <br>`;
 
@@ -157,7 +167,7 @@ function lightCard(){
                     }
 
                 if(this.status == "off"){
-                    card += `<button data-card="`+this.id+`" class="btn btn-info m-2">Turn on</button>`;
+                    card += `<button data-card="${this.id}" class="btn btn-info m-2">Turn on</button>`;
                 }else{
                     card += `<button id="add" class="btn btn-info m-2">Turn off</button>`;
                 }
@@ -169,11 +179,11 @@ function lightCard(){
 };
 
 function panelCard(){
-    let card = `<div id="P`+this.id+`">
-                    <div id="`+this.id+`" class="my-3 mx-5 card card-panel">
+    let card = `<div id="P${this.id}">
+                    <div id="${this.id}" class="my-3 mx-5 card card-panel">
                         <div class="card-body text-center">
-                        <h5 class="card-tittle">`+this.name+`</h5>
-                        <canvas class="p-3" id="chart-`+this.id+`" width="100%" height="100%"></canvas>
+                        <h5 class="card-tittle">${this.name}</h5>
+                        <canvas class="p-3" id="chart-${this.id}" width="100%" height="100%"></canvas>
                         </div>
                     </div>
                 </div>`;
@@ -182,28 +192,55 @@ function panelCard(){
 }
 
 function speakerCard(){
-    let card = `<div id="S`+this.id+`">
-                    <div id="`+this.id+`" class="my-3 mx-5 card card-speacker">
+    let card = `<div id="S${this.id}">
+                    <div id="${this.id}" class="my-3 mx-5 card card-speacker">
                         <div class="card-body text-center">
-                        <h5 class="card-tittle mb-3">`+this.name+`</h5>
+                        <h5 class="card-tittle mb-3">${this.name}</h5>
                         <span class="text-left mr-3">
-                            <i class="fas fa-volume-up mr-1"></i>`+this.volume+`
+                            <i class="fas fa-volume-up mr-1"></i>${this.volume}
                         </span>`;
                 
                 switch(this.brand){
-                    case("google"): card += `<img class="logo text-center" src="../img/google.png">`;
+                    case("Google"): card += `<img class="logo text-center" src="../img/google.png">`;
                                     break;
-                    case("alexa"): card += `<img class="logo" src="../img/alexa.png">`;
+                    case("Alexa"): card += `<img class="logo" src="../img/alexa.png">`;
                                     break;
-                    case("apple"): card += `<img class="logo" src="../img/apple.png">`;
+                    case("Apple"): card += `<img class="logo" src="../img/apple.png">`;
                                     break;
+                    case("Xiaomi"): card += `<img class="logo" src="../img/xiaomi.png">`;
+                                             break;
+                    case("Philips"): card += `<img class="logo" src="../img/philips.png">`;
+                                    break;
+                    case("TP-Link"): card += `<img class="logo" src="../img/tplink.png">`;
+                                             break;
+                    case("LG"): card += `<img class="logo" src="../img/lg.png">`;
+                                            break;
+                    case("Samsung"): card += `<img class="logo" src="../img/samsung.png">`;
+                                            break;
+                    default : card += `<img class="logo" src="../img/speaker.png">`;
+                                        break;
                 }        
                         
-                card += `<span class="text-right ml-4">`+this.status+`</span>
+                card += `</span><span class="text-right ml-4">${this.status}</span>
                         </div>
                     </div>
                 </div>`;
 
+    return card;
+}
+
+function userCard(){
+    let card;
+
+    card = `<div id="${this.nickname}">
+                <div class="card user-card m-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-tittle">${this.nickname}</h5>
+                        <p>Nombre: ${this.name}</p>
+                        <p>Rank: ${this.rank}</p>
+                    </div>
+                </div>
+            </div>`
     return card;
 }
 
@@ -247,13 +284,11 @@ let addModal = `<div class="modal fade" id="exampleModal" tabindex="-1" role="di
                             <option value="solarpanel">Solarpanel</option>
                         </select>
                     </div>
-                    <div id="insertModal">
-                    </div>
                 </form>
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button id="add" type="button" class="btn btn-success">Save</button>
+                <button id="add" type="button" class="btn btn-success" data-dismiss="modal">Save</button>
                 </div>
             </div>
             </div>

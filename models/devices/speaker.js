@@ -10,5 +10,13 @@ class Speaker{
         this.type = type;
         this.volume = volume;
         this.card = speakerCard;
+
+        if(this.volume == null){
+            this.volume = (Math.floor(Math.random()*100)).toString();
+        }
+
+        if(this.status == null){
+            this.status = "on";
+        }
     }
 }

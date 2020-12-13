@@ -45,7 +45,7 @@
       "rgb": "1",
       "color": "#5AFD98",
       "power": "8w",
-      "brand": "Philips"
+      "brand": "LG"
     },
     {
       "id": "L5",
@@ -57,7 +57,7 @@
       "rgb": "1",
       "color": "#D46AE1",
       "power": "8w",
-      "brand": "Xiaomi"
+      "brand": "Samsung"
     },
     {
       "id": "P1",
@@ -87,7 +87,7 @@
     },
     {
       "id": "S1",
-      "brand": "google",
+      "brand": "Google",
       "name": "Google Home",
       "status": "on",
       "type": "speaker",
@@ -95,7 +95,7 @@
     },
     {
       "id": "S2",
-      "brand": "alexa",
+      "brand": "Alexa",
       "name": "Echo mini",
       "status": "on",
       "type": "speaker",
@@ -103,7 +103,7 @@
     },
     {
       "id": "S3",
-      "brand": "apple",
+      "brand": "Apple",
       "name": "HomePod",
       "status": "on",
       "type": "speaker",
