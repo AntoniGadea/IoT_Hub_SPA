@@ -1,11 +1,13 @@
-export{validarLogin,validateModal};
 import {setCookie,getCookie,clearCookie,checkCookie} from './models/cookie.js';
-import {drawLogin, drawOverview, drawDevices, errorLoad,  drawLoading, drawAdminPanel, loadModalEvents, reloadAll, drawUsers} from './views/views.js';
+import {drawLogin, drawLoading} from './views/views.js';
+import {drawOverview, drawDevices, loadModalEvents, reloadAll} from './views/viewsUsers.js';
+import {drawAdminPanel, drawUsers} from './views/viewsAdmin.js';
 import {get} from './models/http.js';
 import {Light} from './models/devices/light.js';
 import {Solarpanel} from "./models/devices/solarpanel.js";
 import {User} from './models/user.js';
-import { Speaker } from './models/devices/speaker.js';
+import {Speaker} from './models/devices/speaker.js';
+export{validarLogin,validateModal};
 
 //GLOBAL
 let users = [];

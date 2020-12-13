@@ -182,6 +182,9 @@ function panelCard(){
     let card = `<div id="P${this.id}">
                     <div id="${this.id}" class="my-3 mx-5 card card-panel">
                         <div class="card-body text-center">
+                        <button type="button" class="close mr-3" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </button>
                         <h5 class="card-tittle">${this.name}</h5>
                         <canvas class="p-3" id="chart-${this.id}" width="100%" height="100%"></canvas>
                         </div>
@@ -195,7 +198,10 @@ function speakerCard(){
     let card = `<div id="S${this.id}">
                     <div id="${this.id}" class="my-3 mx-5 card card-speacker">
                         <div class="card-body text-center">
-                        <h5 class="card-tittle mb-3">${this.name}</h5>
+                        <button type="button" class="close mr-3" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="card-tittle mb-4">${this.name}</h5>
                         <span class="text-left mr-3">
                             <i class="fas fa-volume-up mr-1"></i>${this.volume}
                         </span>`;
