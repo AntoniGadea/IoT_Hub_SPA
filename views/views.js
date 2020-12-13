@@ -102,7 +102,6 @@ function loadCardEvents(devices){
 }
 
 function loadPanel(device){
-    document.getElementById(device.id);
     device.createChart();
     device.startRandomValues();
 }
@@ -139,7 +138,8 @@ function reload(device){
                         cardContainer.innerHTML = device.card();
                         loadLight(device);
                         break;
-        case "solarpanel": document.querySelector("#panels").innerHTML = device.card();
+        case "solarpanel": device.chart = "";
+                            loadPanel(device);
                             break;
         case "fridge": fridgeCard(d);
                         break;

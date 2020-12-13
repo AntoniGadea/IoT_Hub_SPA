@@ -133,11 +133,10 @@ function validarLogin(){
     object = JSON.parse(object)
     object = createNewObject(object);
     objectArray.push(object);
-    devices[devices.length] = object;
     drawDevices(objectArray);
-    console.log(devices);
-    //reloadAll(devices)
-    loadModalEvents();
+    reloadAll(devices);
+    devices[devices.length] = object;
+    loadModalEvents();;
   }
 
   document.addEventListener("DOMContentLoaded", async function () {

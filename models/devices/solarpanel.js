@@ -18,7 +18,8 @@ class Solarpanel{
     }
 
     createChart(){
-        this.production = this.production.split(",");
+        if(typeof(this.production) == "string")
+            this.production = this.production.split(",");
 
         this.dataProduction = {
             labels: Solarpanel.genLabels(),
@@ -95,11 +96,13 @@ class Solarpanel{
     }
 
     startRandomValues(){
-        window.setInterval(()=>{
+        if(this.interval != null)
+            window.clearInterval(this.interval);
+
+        this.interval = window.setInterval(()=>{
             this.randomize();
             this.chart.update();
         },60000);
-        
     }
 
 }
