@@ -14,6 +14,7 @@ let users = [];
 let devices;
 let id = 10;
 
+
 function selectorLoad(rank){
   if(rank == "admin"){
     loadAppAdmin();
@@ -49,8 +50,8 @@ async function getUsers(){
 
 }
 
-function saveLocal(data){
-      localStorage.setItem("users",JSON.stringify(data));
+const saveLocal = function(data){ //expresion de funcion 
+      localStorage.setItem("users",JSON.stringify(data)); //json
 }
 
 function createObjects(devices){
@@ -147,7 +148,9 @@ function validateModal(){
     loadModalEvents();;
   }
 
-  document.addEventListener("DOMContentLoaded", async function () {
+(()=>{
+  'use strict'
+  document.addEventListener("DOMContentLoaded", async function () { 
     let cookie;
     cookie = checkCookie();
     await getUsers();
@@ -163,7 +166,4 @@ function validateModal(){
     }
 
   });
-
-  
-
-
+})();
