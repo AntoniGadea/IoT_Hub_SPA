@@ -27,7 +27,7 @@ async function loadAppUser(){
   let plainObj;
   devices;
 
-  plainObj = await get("http://127.0.0.1:5500/JSON/devices.json");
+  plainObj = await get("./JSON/devices.json");
   devices = createObjects(plainObj);
   drawOverview();
   drawDevices(devices);
@@ -40,7 +40,7 @@ function loadAppAdmin(){
 
 async function getUsers(){
   let i = 0;
-  let response = await get("http://127.0.0.1:5500/JSON/users.json",getUsers);
+  let response = await get("./JSON/users.json",getUsers);
   
   saveLocal(response);
 

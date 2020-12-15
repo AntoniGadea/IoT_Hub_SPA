@@ -127,21 +127,21 @@ function lightCard(){
                 }
 
                 switch(this.brand){
-                    case("Google"): card += `<img class="logo text-center" src="../img/google.png">`;
+                    case("Google"): card += `<img class="logo text-center" src="./img/google.png">`;
                                     break;
-                    case("Alexa"): card += `<img class="logo" src="../img/alexa.png">`;
+                    case("Alexa"): card += `<img class="logo" src="./img/alexa.png">`;
                                     break;
-                    case("Apple"): card += `<img class="logo" src="../img/apple.png">`;
+                    case("Apple"): card += `<img class="logo" src="./img/apple.png">`;
                                     break;
-                    case("Xiaomi"): card += `<img class="logo" src="../img/xiaomi.png">`;
+                    case("Xiaomi"): card += `<img class="logo" src="./img/xiaomi.png">`;
                                              break;
-                    case("Philips"): card += `<img class="logo" src="../img/philips.png">`;
+                    case("Philips"): card += `<img class="logo" src="./img/philips.png">`;
                                     break;
-                    case("TP-Link"): card += `<img class="logo" src="../img/tplink.png">`;
+                    case("TP-Link"): card += `<img class="logo" src="./img/tplink.png">`;
                                              break;
-                    case("LG"): card += `<img class="logo" src="../img/lg.png">`;
+                    case("LG"): card += `<img class="logo" src="./img/lg.png">`;
                                             break;
-                    case("Samsung"): card += `<img class="logo" src="../img/samsung.png">`;
+                    case("Samsung"): card += `<img class="logo" src="./img/samsung.png">`;
                                             break;
                     default : card += `</span>`;
                                         break;
@@ -207,23 +207,23 @@ function speakerCard(){
                         </span>`;
                 
                 switch(this.brand){
-                    case("Google"): card += `<img class="logo text-center" src="../img/google.png">`;
+                    case("Google"): card += `<img class="logo text-center" src="./img/google.png">`;
                                     break;
-                    case("Alexa"): card += `<img class="logo" src="../img/alexa.png">`;
+                    case("Alexa"): card += `<img class="logo" src="./img/alexa.png">`;
                                     break;
-                    case("Apple"): card += `<img class="logo" src="../img/apple.png">`;
+                    case("Apple"): card += `<img class="logo" src="./img/apple.png">`;
                                     break;
-                    case("Xiaomi"): card += `<img class="logo" src="../img/xiaomi.png">`;
+                    case("Xiaomi"): card += `<img class="logo" src="./img/xiaomi.png">`;
                                              break;
-                    case("Philips"): card += `<img class="logo" src="../img/philips.png">`;
+                    case("Philips"): card += `<img class="logo" src="./img/philips.png">`;
                                     break;
-                    case("TP-Link"): card += `<img class="logo" src="../img/tplink.png">`;
+                    case("TP-Link"): card += `<img class="logo" src="./img/tplink.png">`;
                                              break;
-                    case("LG"): card += `<img class="logo" src="../img/lg.png">`;
+                    case("LG"): card += `<img class="logo" src="./img/lg.png">`;
                                             break;
-                    case("Samsung"): card += `<img class="logo" src="../img/samsung.png">`;
+                    case("Samsung"): card += `<img class="logo" src="./img/samsung.png">`;
                                             break;
-                    default : card += `<img class="logo" src="../img/speaker.png">`;
+                    default : card += `<img class="logo" src="./img/speaker.png">`;
                                         break;
                 }        
                         
