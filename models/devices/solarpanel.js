@@ -17,6 +17,7 @@ class Solarpanel{
         }
     }
 
+    //Crea una grafica segun los datos del objeto
     createChart(){
         if(typeof(this.production) == "string")
             this.production = this.production.split(",");
@@ -56,7 +57,7 @@ class Solarpanel{
 
           this.startRandomValues();
     }
-
+    //Genera valores aleatorios
     randomize(){
         let newData = Math.floor(Math.random()*2);
 
@@ -71,7 +72,7 @@ class Solarpanel{
         }
         this.chart.data.labels = Solarpanel.genLabels();
     }
-
+    // Gemera las etiquetas de la grafica a partir de la h:mm en el momento de ejecucion
     static genLabels(){
         let labels = [];
         let date = new Date();
@@ -95,6 +96,7 @@ class Solarpanel{
         return labels.reverse();
     }
 
+    //Inicia la auto-actualizacion de la grafica
     startRandomValues(){
         if(this.interval != null)
             window.clearInterval(this.interval);

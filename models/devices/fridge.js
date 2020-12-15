@@ -1,5 +1,5 @@
 export {fridge};
-
+//No implementado
 class fridge{
         constructor(id,type,name,status,upTemp,downTemp){
             this.id = id;

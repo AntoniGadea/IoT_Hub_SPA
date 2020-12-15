@@ -33,11 +33,12 @@ async function loadAppUser(){
   drawDevices(devices);
 }
 
+// Controla si el usuario logueado es normal o admin
 function loadAppAdmin(){
   drawAdminPanel();
   drawUsers(users);
 }
-
+// Descarga JSON de usuarios y transforma en objetos
 async function getUsers(){
   let i = 0;
   let response = await get("./JSON/users.json",getUsers);
@@ -49,11 +50,11 @@ async function getUsers(){
   }
 
 }
-
+// Guarda en LocalStorage datos
 const saveLocal = function(data){ //expresion de funcion 
       localStorage.setItem("users",JSON.stringify(data)); //json
 }
-
+// A aprtir de Objetos planos, crea objetos segun su tipo
 function createObjects(devices){
   let buildObj = [];
   let i = 0;
@@ -72,7 +73,7 @@ function createObjects(devices){
   }
   return buildObj;
 }
-
+// A aprtir de Objetos planos, crea objetos segun su tipo i le asigna una ID.
 function createNewObject(newDevice){
   switch(newDevice.type){
     case "light": newDevice = Object.assign(new Light(),newDevice);
@@ -87,7 +88,7 @@ function createNewObject(newDevice){
   }
   return newDevice;
 }
-
+//Valida el login --> Trasladar a views
 function validarLogin(){
   let name = document.getElementById("inputUsername").value;
   let passwd = document.getElementById("inputPassword").value;
@@ -98,7 +99,7 @@ function validarLogin(){
       }
     }
   }
-  
+//Compara la contraseña introducida con el hash de ususarios permitidos
 function comparePasswd(hashKey,key){
     key = CryptoJS.SHA3(key);
     key = key.words;
@@ -106,7 +107,7 @@ function comparePasswd(hashKey,key){
     
     return key.toString() == hashKey.toString();
   }
-
+//Recoge los datos introducidos del Modal y crea un objeto nuevo. --> trasladar a viewsUsers
 function validateModal(){
     let form = document.querySelector("form");
     let formParts = form.querySelectorAll(".form-group");

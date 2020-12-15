@@ -134,6 +134,7 @@ function reloadAll(devices){
     }
 }
 
+//Segun el tipo elegido en el Modal, cargara una de las siguientes 3 funciones
 function modalLight(){
     let modalLight;
     let formGroup1;
