@@ -40,11 +40,17 @@ function loadAppAdmin(){
 async function getUsers(){
   let i = 0;
   let response = await get("http://127.0.0.1:5500/JSON/users.json",getUsers);
+  
+  saveLocal(response);
 
   for(let user of response){
     users[i++]=Object.assign(new User(),user);
   }
 
+}
+
+function saveLocal(data){
+      localStorage.setItem("users",JSON.stringify(data));
 }
 
 function createObjects(devices){
@@ -92,7 +98,7 @@ function validarLogin(){
     }
   }
   
-  function comparePasswd(hashKey,key){
+function comparePasswd(hashKey,key){
     key = CryptoJS.SHA3(key);
     key = key.words;
     hashKey = hashKey.words;
@@ -100,7 +106,7 @@ function validarLogin(){
     return key.toString() == hashKey.toString();
   }
 
-  function validateModal(){
+function validateModal(){
     let form = document.querySelector("form");
     let formParts = form.querySelectorAll(".form-group");
     let inputs = [];
